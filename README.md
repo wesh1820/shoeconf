@@ -1,1 +1,0 @@
-# Shoe_configurator
