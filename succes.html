@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestelling Geplaatst</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        h1 {
+            color: #28a745;
+        }
+        #order-details {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    width: 80%;
+    margin: 30px auto;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Titel van de bestelling */
+#order-details h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 700;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Flex container voor elk order-item */
+.order-item {
+    display: flex;
+    flex-direction: column; /* Laat ze verticaal stacken bij kleine schermen */
+    margin-bottom: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Label van elk item zoals 'Laces' en 'Kleur' */
+.item-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* De container voor de waarden van kleur en textuur naast elkaar */
+.item-values {
+    display: flex;
+    justify-content: space-between; /* Zorgt dat de kleur en textuur naast elkaar staan */
+    gap: 20px;
+}
+
+/* Individuele itemwaarde zoals kleur en textuur */
+.item-values div {
+    flex: 1;
+}
+
+/* Styling voor de kleur */
+.color span {
+    color: inherit;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* Styling voor de textuur */
+.texture span {
+    color: #555;
+    font-size: 1rem;
+}
+
+/* Voor de case als je een afbeelding toevoegt */
+#order-details img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Zorg voor een responsive layout als de schermgrootte kleiner wordt */
+@media (max-width: 768px) {
+    #order-details {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .item-values {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .item-values div {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+
+    <h1>Bestelling Geplaatst!</h1>
+    <div id="order-details">
+        <h2>Uw Bestelling</h2>
+        <!-- Order details -->
+       
+    </div>
+    
+
+    <script>
+        // Haal de orderdetails uit localStorage
+        const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
+
+        if (orderDetails) {
+    const orderDetailsDiv = document.getElementById('order-details');
+    orderDetailsDiv.innerHTML = `<h2>Uw Bestelling</h2>`;
+
+    // Toon de details van de bestelling
+    for (let objectName in orderDetails) {
+        const detail = orderDetails[objectName];
+        orderDetailsDiv.innerHTML += `
+            <div class="order-item">
+                <div class="item-label">
+                    <strong>${objectName}:</strong>
+                </div>
+                <div class="item-values">
+                    <div class="color">
+                        <strong>Kleur:</strong> 
+                        <span style="color: ${detail.color};">${detail.color}</span>
+                    </div>
+                    <div class="texture">
+                        <strong>Textuur:</strong> 
+                        <span>${detail.texture}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+            // Haal het screenshot op en toon het
+            const screenshotDataUrl = localStorage.getItem('shoeScreenshot');
+            if (screenshotDataUrl) {
+                orderDetailsDiv.innerHTML += `
+                    <p><strong>Afbeelding van uw bestelling:</strong></p>
+                    <img src="${screenshotDataUrl}" alt="Bestelling Screenshot">
+                `;
+            }
+        } else {
+            // Als geen bestelgegevens zijn gevonden
+            document.body.innerHTML = '<h1>Er is iets misgegaan met uw bestelling.</h1>';
+        }
+    </script>
+
+</body>
+</html>

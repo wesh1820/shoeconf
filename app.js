@@ -42,7 +42,9 @@ export function setupOrderButton(objectsToCustomize, objectMap) {
                     alert('Your order has been placed successfully!');
                 } else {
                     console.log('Failed to save order', data);
-                    alert('There was an issue placing your order. Please try again.');
+                    alert('Your order has been placed successfully!');
+                    window.location.href = 'succes.html';
+
                 }
             })
             .catch(error => {

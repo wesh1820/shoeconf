@@ -83,28 +83,50 @@ loader.load('assets/models/shoe.gltf', (gltf) => {
     // Start customization menu voor het eerste object
     openCustomizationMenu(objectsToCustomize[currentObjectIndex]);
 });
-// Order Button Event Listener
-document.getElementById('order-button').addEventListener('click', () => {
-    const orderDetails = {};
 
-    // Loop through all customizable objects
+
+// Functie om een screenshot te maken van de scène
+function captureScreenshot() {
+    renderer.render(scene, camera); // Render de scene handmatig voordat de screenshot wordt genomen
+    const canvas = renderer.domElement;
+    const screenshotDataUrl = canvas.toDataURL('image/png'); // Genereer de screenshot als base64-afbeelding
+
+    console.log(screenshotDataUrl);  // Controleer de output in de console
+
+    // Sla de afbeelding op in localStorage
+    localStorage.setItem('shoeScreenshot', screenshotDataUrl);
+}
+
+
+
+
+
+
+document.getElementById('winkelwagen-button').addEventListener('click', () => {
+    // Maak een screenshot van het canvas
+    captureScreenshot();
+
+    // Verzamel orderdetails
+    const orderDetails = {};
     objectsToCustomize.forEach((objectName) => {
         const object = objectMap[objectName];
         if (object) {
             orderDetails[objectName] = {
-                color: `#${object.material.color.getHexString()}`, // Hex kleur
-                texture: object.material.map ? object.material.map.image.src : 'None', // Textuurbron of 'None'
+                color: `#${object.material.color.getHexString()}`,
+                texture: object.material.map ? object.material.map.image.src : 'Geen',
             };
         }
     });
 
-    // Output de gegevens naar de console of op de pagina
-    console.log('Order Details:', orderDetails);
+    // Sla gegevens op in localStorage
+    localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
 
-    // Toon de gegevens in een <pre> element (optioneel)
-    const orderOutput = document.getElementById('order-output');
-    orderOutput.textContent = JSON.stringify(orderDetails, null, 2);
+    // Navigeer naar de order.html-pagina
+    window.location.href = 'order.html';
 });
+
+
+
 
 document.querySelectorAll('.texture-preview').forEach(button => {
     button.addEventListener('click', () => {
@@ -135,11 +157,19 @@ document.querySelectorAll('.color-preview').forEach(button => {
 
 // Functie om het menu voor het object te openen
 function openCustomizationMenu(objectName) {
+    if (selectedObject) {
+        // Reset de emissive kleur van het vorige geselecteerde object
+        selectedObject.material.emissive.set(0x000000);
+    }
+
     selectedObject = objectMap[objectName]; // Verkrijg het object uit de objectMap
     const menu = document.getElementById('customization-menu');
     const objectNameLabel = document.getElementById('object-name');
     const colorPicker = document.getElementById('color-picker');
     const texturePicker = document.getElementById('texture-picker');
+
+    // Highlight het geselecteerde object met een grijze emissive kleur
+    selectedObject.material.emissive.set(0x808080);
 
     // Toon het menu
     menu.style.display = 'block';
@@ -178,18 +208,6 @@ function openCustomizationMenu(objectName) {
     };
 }
 
-// Functie om naar het volgende object te gaan
-document.getElementById('next-object').onclick = () => {
-    currentObjectIndex = (currentObjectIndex + 1) % objectsToCustomize.length;
-    openCustomizationMenu(objectsToCustomize[currentObjectIndex]);
-};
-
-// Functie om naar het vorige object te gaan
-document.getElementById('previous-object').onclick = () => {
-    currentObjectIndex = (currentObjectIndex - 1 + objectsToCustomize.length) % objectsToCustomize.length;
-    openCustomizationMenu(objectsToCustomize[currentObjectIndex]);
-};
-
 // Raycasting om objecten aan te klikken en menu te openen
 document.addEventListener('click', (event) => {
     const mouse = new THREE.Vector2();
@@ -204,12 +222,27 @@ document.addEventListener('click', (event) => {
     if (intersects.length > 0) {
         const clickedObject = intersects[0].object;
 
-        // Alleen specifieke onderdelen toestaan
+        // Controleer of het geklikte object in de lijst van te customizen objecten zit
         if (objectsToCustomize.includes(clickedObject.name)) {
             openCustomizationMenu(clickedObject.name);
         }
+    } else {
+        // Klikken op de achtergrond (geen object is aangeklikt)
+        const newColor = document.getElementById('color-picker').value; // Haal de geselecteerde kleur op
+
+        // Pas de kleur toe op alle te customizen objecten
+        objectsToCustomize.forEach((objectName) => {
+            const object = objectMap[objectName];
+            if (object) {
+                object.material.color.set(newColor);
+                object.material.needsUpdate = true; // Update de materialen
+            }
+        });
+
+        console.log("Kleur toegepast op alle objecten omdat er op de achtergrond is geklikt.");
     }
 });
+
 
 // Lighting
 const light = new THREE.PointLight(0xffffff, 1, 100);
@@ -352,3 +385,4 @@ function animate() {
     renderer.render(scene, camera);
 }
 renderer.setAnimationLoop(animate);
+
