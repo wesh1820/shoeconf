@@ -8,8 +8,16 @@ export function setupOrderButton(objectsToCustomize, objectMap) {
             objectsToCustomize.forEach((objectName) => {
                 const object = objectMap[objectName];
                 if (object) {
+                    // Log the color to debug
+                    console.log('Object:', objectName);
+                    console.log('Material color:', object.material.color);
+                    
+                    // Get the hex color string, with a fallback to '#FFFFFF' (white) in case of errors
+                    const colorHex = object.material.color ? `#${object.material.color.getHexString()}` : '#FFFFFF';
+                    console.log('Color Hex:', colorHex); // Debugging the hex color
+
                     orderDetails[objectName] = {
-                        color: `#${object.material.color.getHexString()}`, // Hex color
+                        color: colorHex,  // Hex color
                         texture: object.material.map ? object.material.map.image.src : 'None', // Texture source or 'None'
                     };
                 }
@@ -43,8 +51,7 @@ export function setupOrderButton(objectsToCustomize, objectMap) {
                 } else {
                     console.log('Failed to save order', data);
                     alert('Your order has been placed successfully!');
-                    window.location.href = '../succes.html';
-
+                    window.location.href = './succes.html';
                 }
             })
             .catch(error => {

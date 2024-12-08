@@ -4,204 +4,76 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Order Overzicht</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        h1 {
-            color: #1d4ed8;
-        }
-        img {
-            max-width: 100%;
-            width: 600px; /* Bepaal een maximale breedte voor de afbeelding */
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        .order-details {
-            margin-top: 30px;
-            text-align: left;
-            display: inline-block;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
-        }
-        .error {
-            color: red;
-        }
-        .order-details h2 {
-            margin-top: 0;
-            color: #1d4ed8;
-        }
-        .order-details p {
-            margin: 5px 0;
-            font-size: 1.1em;
-        }
-        button {
-            background-color: #1d4ed8;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #2563eb;
-        }
-/* Algemeen ontwerp voor het orderoverzicht */
-#order-list {
-    width: 90%;  /* Zorg ervoor dat de lijst niet te breed is */
-    max-width: 600px;  /* Maximaliseer de breedte voor grotere schermen */
-    margin: 0 auto; /* Centreer het element */
-    padding: 8px;
-    background-color: #fafafa; /* Lichte achtergrondkleur */
-    border-radius: 8px; /* Ronde hoeken voor een zachtere uitstraling */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Lichte schaduw voor diepte */
-}
-
-/* De container voor de individuele order items */
-.order-item {
-    display: flex;
-    justify-content: space-between;  /* Zorg ervoor dat de inhoud verdeeld wordt */
-    align-items: center;  /* Verticaal centreren */
-    padding: 8px 12px;
-    background-color: #fff;
-    margin-bottom: 10px;
-    border: 1px solid #eee;
-    border-radius: 6px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Hover-effect voor de order-items */
-.order-item:hover {
-    transform: translateY(-3px); /* Item komt iets omhoog bij hover */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Versterkte schaduw bij hover */
-}
-
-/* Zorg ervoor dat de labels en de waarden naast elkaar staan */
-.order-item label {
-    font-weight: bold;
-    color: #555;
-    margin-right: 5px;
-}
-
-.order-item span {
-    font-size: 0.95em;
-    color: #666;
-}
-
-/* Specifieke stijlen voor kleur en textuur */
-#object-color, #object-texture {
-    font-style: italic;
-    color: #777;
-}
-
-/* Maak de naam van het object iets groter en vetgedrukt */
-.order-item strong {
-    font-size: 1em;
-    color: #333;
-}
-
-/* Kleine aanpassingen voor kleinere schermen */
-@media (max-width: 600px) {
-    #order-list {
-        padding: 6px;
-    }
-    .order-item {
-        padding: 6px 10px;
-        margin-bottom: 8px;
-    }
-    .order-item strong {
-        font-size: 0.9em;
-    }
-    .order-item label {
-        font-size: 0.8em;
-    }
-    .order-item span {
-        font-size: 0.85em;
-    }
-}
-
-    </style>
+    <link rel="stylesheet" href="./css/order.css">
 </head>
 <body>
-    <h1>Uw Schoen Overzicht</h1>
+    <h1>Shopping cart</h1>
+    <section class="sectieorder">
     <div id="screenshot-container"></div>
-
     <div id="order-list">
         <!-- De lijst van bestellingen wordt hier dynamisch toegevoegd -->
     </div>
-      
+</section>
+<div class="buttons">
+    <button onclick="window.location.href='index.html'">Back to configuration</button>
     <button id="order-button">Order</button>
-    <button onclick="window.location.href='index.html'">Terug naar Winkel</button>
+</div>
+
     <script type="module" src="/main.js"></script>
     <script type="module" src="/app.js"></script>
     <script>
         // Haal gegevens op uit localStorage
         const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
         const screenshotDataUrl = localStorage.getItem('shoeScreenshot');
-console.log(screenshotDataUrl); // Voeg deze regel toe om te zien of de screenshot daadwerkelijk wordt opgeslagen
-if (screenshotDataUrl) {
-    const img = document.createElement('img');
-    img.src = screenshotDataUrl;
-    img.alt = 'Uw schoen screenshot';
-    
-    img.onload = () => {
-        document.getElementById('screenshot-container').appendChild(img);
-    };
-    
-    img.onerror = (error) => {
-        console.error("Er is een probleem met het laden van de afbeelding:", error);
-        document.getElementById('screenshot-container').innerHTML = '<p class="error">Er is een probleem met het laden van de afbeelding.</p>';
-    };
-} else {
-    document.getElementById('screenshot-container').innerHTML = '<p class="error">Geen screenshot beschikbaar.</p>';
-}
-
-
-
-window.onload = () => {
-    // Verkrijg de ordergegevens uit localStorage
-    const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
-    const orderList = document.getElementById('order-list');
-
-    // Controleer of er daadwerkelijk orderdetails zijn
-    if (orderDetails) {
-        // Itereer over de objecten die we willen weergeven
-        Object.keys(orderDetails).forEach((key) => {
-            const details = orderDetails[key];
+        console.log(screenshotDataUrl); // Voeg deze regel toe om te zien of de screenshot daadwerkelijk wordt opgeslagen
+        if (screenshotDataUrl) {
+            const img = document.createElement('img');
+            img.src = screenshotDataUrl;
+            img.alt = 'Uw schoen screenshot';
             
-            // Maak een nieuw div-element voor dit object
-            const orderItem = document.createElement('div');
-            orderItem.classList.add('order-item'); // Voeg een klasse toe voor styling indien gewenst
+            img.onload = () => {
+                document.getElementById('screenshot-container').appendChild(img);
+            };
+            
+            img.onerror = (error) => {
+                console.error("Er is een probleem met het laden van de afbeelding:", error);
+                document.getElementById('screenshot-container').innerHTML = '<p class="error">Er is een probleem met het laden van de afbeelding.</p>';
+            };
+        } else {
+            document.getElementById('screenshot-container').innerHTML = '<p class="error">Geen screenshot beschikbaar.</p>';
+        }
 
-            // Maak de inhoud van het item
-            orderItem.innerHTML = `
-                <div><strong>Object: </strong>${key}</div>
-                <div><strong>Color:</strong> <span>${details.color}</span></div>
-                <div><strong>Texture:</strong> <span>${details.texture}</span></div>
-            `;
+        window.onload = () => {
+            // Verkrijg de ordergegevens uit localStorage
+            const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
+            const orderList = document.getElementById('order-list');
 
-            // Voeg het nieuwe orderItem toe aan de orderList
-            orderList.appendChild(orderItem);
-        });
-    } else {
-        // Als er geen ordergegevens zijn, geef dan een bericht weer
-        orderList.innerHTML = '<p>No order details found.</p>';
-    }
-};
-      
+            // Controleer of er daadwerkelijk orderdetails zijn
+            if (orderDetails) {
+                // Itereer over de objecten die we willen weergeven
+                Object.keys(orderDetails).forEach((key) => {
+                    const details = orderDetails[key];
+                    
+                    // Maak een nieuw div-element voor dit object
+                    const orderItem = document.createElement('div');
+                    orderItem.classList.add('order-item'); // Voeg een klasse toe voor styling indien gewenst
+
+                    // Maak de inhoud van het item
+                    orderItem.innerHTML = `
+                        <div><strong>Object: </strong>${key}</div>
+                        <div><strong>Color:</strong> <span><div class="color-box" style="background-color: ${details.color};"></div></span></div>
+                        <div><strong>Texture:</strong> <span>${details.texture}</span></div>
+                    `;
+
+                    // Voeg het nieuwe orderItem toe aan de orderList
+                    orderList.appendChild(orderItem);
+                });
+            } else {
+                // Als er geen ordergegevens zijn, geef dan een bericht weer
+                orderList.innerHTML = '<p>No order details found.</p>';
+            }
+        };
     </script>
-    
 </body>
 </html>
+

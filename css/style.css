@@ -1,0 +1,133 @@
+body {
+  margin: 0;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+}
+
+main {
+  position: relative;
+  z-index: 9999;
+  padding-top: 100vh;
+}
+
+section {
+  height: 100vh;
+}
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif ;
+  text-align: left;
+  font-size: 50px;
+  color: #d2b600;
+  text-shadow: 1px 1px 1px #000;
+}
+
+.container {
+  text-align: center;
+  background-color: white;
+}
+
+.swear {
+  width: 400px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 3.5em;
+  color: #333;
+  margin-top: -120px;
+  background-color: rgb(105, 255, 71);
+}
+
+#customization-menu {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
+  background-color: rgb(0 0 0 / 33%);
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+#customization-menu h3 {
+  margin-top: 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+h4 {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#color-options, #texture-options {
+  margin-bottom: 20px;
+}
+
+#color-circle {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.color-preview {
+  border: 2px solid #ccc;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.color-preview:hover {
+  border-color: #000;
+}
+
+#texture-preview {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.texture-preview {
+  border: 2px solid #ccc;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  border-radius: 200px;
+}
+
+.texture-preview:hover {
+  border-color: #000;
+}
+
+#winkelwagen-button {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#winkelwagen-button:hover {
+  background-color: rgba(0, 0, 0, 0.517);
+  transform: translateY(-2px);
+}
+

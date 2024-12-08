@@ -54,8 +54,8 @@ const objectMap = {};
 setupOrderButton(objectsToCustomize, objectMap);
 // Kleurkeuzes (4 kleuren)
 const colors = [
-    0x3776ff, // Red
-    0x00FF00, // Green
+    0xA89961, // Red
+    0xFF3431, // Green
     0x0000FF, // Blue
     0xFFFF00  // Yellow
 ];
@@ -113,7 +113,7 @@ document.getElementById('winkelwagen-button').addEventListener('click', () => {
         if (object) {
             orderDetails[objectName] = {
                 color: `#${object.material.color.getHexString()}`,
-                texture: object.material.map ? object.material.map.image.src : 'Geen',
+                texture: object.material.map ? object.material.map.image.src : 'None',
             };
         }
     });
@@ -385,4 +385,5 @@ function animate() {
     renderer.render(scene, camera);
 }
 renderer.setAnimationLoop(animate);
+
 

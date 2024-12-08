@@ -1,0 +1,267 @@
+img {
+  max-width: 100%;
+  width: 600px; /* Bepaal een maximale breedte voor de afbeelding */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+.order-details {
+  margin-top: 30px;
+  text-align: left;
+  display: inline-block;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+.error {
+  color: red;
+}
+.order-details h2 {
+  margin-top: 0;
+  color: #1d4ed8;
+}
+.order-details p {
+  margin: 5px 0;
+  font-size: 1.1em;
+}
+button {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+
+}
+button:hover {
+  background-color: rgba(0, 0, 0, 0.711);
+}
+/* Algemeen ontwerp voor het orderoverzicht */
+#order-list {
+  width: 90%;  /* Zorg ervoor dat de lijst niet te breed is */
+  max-width: 600px;  /* Maximaliseer de breedte voor grotere schermen */
+  margin: 0 auto; /* Centreer het element */
+  padding: 8px;
+  background-color: #fafafa; /* Lichte achtergrondkleur */
+  border-radius: 8px; /* Ronde hoeken voor een zachtere uitstraling */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Lichte schaduw voor diepte */
+}
+
+/* De container voor de individuele order items */
+.order-item {
+  display: flex;
+  justify-content: space-between;  /* Zorg ervoor dat de inhoud verdeeld wordt */
+  align-items: center;  /* Verticaal centreren */
+  padding: 8px 12px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover-effect voor de order-items */
+.order-item:hover {
+  transform: translateY(-3px); /* Item komt iets omhoog bij hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Versterkte schaduw bij hover */
+}
+
+/* Zorg ervoor dat de labels en de waarden naast elkaar staan */
+.order-item label {
+  font-weight: bold;
+  color: #555;
+  margin-right: 5px;
+}
+
+.order-item span {
+  font-size: 0.95em;
+  color: #666;
+}
+
+/* Specifieke stijlen voor kleur en textuur */
+#object-color, #object-texture {
+  font-style: italic;
+  color: #777;
+}
+
+/* Maak de naam van het object iets groter en vetgedrukt */
+.order-item strong {
+  font-size: 1em;
+  color: #333;
+}
+
+/* Kleine aanpassingen voor kleinere schermen */
+@media (max-width: 600px) {
+  #order-list {
+      padding: 6px;
+  }
+  .order-item {
+      padding: 6px 10px;
+      margin-bottom: 8px;
+  }
+  .order-item strong {
+      font-size: 0.9em;
+  }
+  .order-item label {
+      font-size: 0.8em;
+  }
+  .order-item span {
+      font-size: 0.85em;
+  }
+}
+
+/* Nieuwe stijl voor het kleurvakje */
+.color-box {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  display: inline-block;
+  border: 1px solid black;
+}
+.sectieorder {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* Zorg ervoor dat de order lijst niet breder is dan 60% van de breedte */
+#order-list {
+  width: 60%;
+}
+
+/* Zorg ervoor dat het screenshot-container niet te groot is */
+#screenshot-container {
+  width: 35%;
+  text-align: center;
+}
+h1 {
+  font-size: 3.5em;
+  color: #333;
+  background-color: rgb(105, 255, 71);
+  text-align: center;
+}
+#orderdetails {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  width: 80%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Titel van de bestelling */
+#orderdetails h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 700;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* Flex container voor elk orderitem */
+.orderitem {
+  display: flex;
+  flex-direction: column; /* Laat ze verticaal stacken bij kleine schermen */
+  margin-bottom: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Label van elk item zoals 'Laces' en 'Kleur' */
+.item-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* De container voor de waarden van kleur en textuur naast elkaar */
+.item-values {
+  display: flex;
+  justify-content: space-between; /* Zorgt dat de kleur en textuur naast elkaar staan */
+  gap: 20px;
+}
+
+/* Individuele itemwaarde zoals kleur en textuur */
+.item-values div {
+  flex: 1;
+}
+
+/* Styling voor de kleur */
+.color span {
+  color: inherit;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Styling voor de textuur */
+.texture span {
+  color: #555;
+  font-size: 1rem;
+}
+.texture {
+  font-size: 16px;
+  color: white;
+}
+
+.texture-circle {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px; /* Zorgt ervoor dat de tekst in het midden van de cirkel komt */
+  color: #fff; /* Tekstkleur binnen de cirkel */
+  font-weight: bold; /* Optioneel, als je wilt dat de tekst vet is */
+  margin-left: 10px;
+}
+
+
+/* Voor de case als je een afbeelding toevoegt */
+#orderdetails img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Zorg voor een responsive layout als de schermgrootte kleiner wordt */
+@media (max-width: 768px) {
+  #order-details {
+      width: 90%;
+      padding: 15px;
+  }
+
+  .item-values {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .item-values div {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+}
+.color-circle {
+  display: inline-block;
+  width: 20px; /* Breedte van de cirkel */
+  height: 20px; /* Hoogte van de cirkel */
+  border-radius: 50%; /* Dit maakt het een cirkel */
+  border: 1px solid black; /* Zwarte rand */
+  margin-left: 10px; /* Ruimte tussen de tekst en de cirkel */
+  text-align: center; /* Zorg ervoor dat de tekst in het midden komt */
+  line-height: 20px; /* Zorgt ervoor dat de tekst verticaal gecentreerd is */
+  font-size: 12px; /* Kleine tekstgrootte */
+  color: white; /* Tekstkleur, afhankelijk van de achtergrondkleur kan dit aangepast worden */
+}

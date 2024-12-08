@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Vite App</title>
   </head>
   <body>
@@ -15,23 +15,33 @@
       <div class="container">
         <img class="swear" src="./public/swearlogo.png" alt="swear" id="swear" />
         <h2>Scroll to see your shoe</h2>
-      </div>
-      <div id="customization-menu" style="display: none;">
+    </div>
+    
+    <div id="customization-menu" style="display: none;">
         <h3 id="object-name">Customize Part</h3>
     
-        <div id="color-circle" style="display: flex; gap: 10px; padding: 10px;">
-          <button class="color-preview" style="background-color: rgb(55, 118, 255);" data-color="#3776ff"></button>
-          <button class="color-preview" style="background-color: rgb(53, 255, 49);" data-color="#00FF00"></button>
-          <button class="color-preview" style="background-color: rgb(255, 154, 225);" data-color="#ff9ae1"></button>
-          <button class="color-preview" style="background-color: rgb(45, 0, 68);" data-color="#2d0044"></button>
-      </div>
-      <div id="texture-preview" style="display: flex; gap: 10px; padding: 10px;">
-          <button class="texture-preview" data-texture="Dam" style="background-image: url('assets/textures/dam.jpg'); width: 50px; height: 50px; background-size: cover;"></button>
-          <button class="texture-preview" data-texture="matcap" style="background-image: url('assets/textures/matcap.png'); width: 50px; height: 50px; background-size: cover;"></button>
-      </div>
-<button id="winkelwagen-button">Winkelwagen</button>
-
+        <!-- Colors Section -->
+        <div id="color-options">
+            <h4>Colors</h4>
+            <div id="color-circle">
+                <button class="color-preview" style="background-color: rgb(168, 153, 97);" data-color="#A89961"></button>
+                <button class="color-preview" style="background-color: rgb(255, 52, 49);" data-color="#FF3431"></button>
+                <button class="color-preview" style="background-color: rgb(255, 154, 225);" data-color="#ff9ae1"></button>
+                <button class="color-preview" style="background-color: rgb(45, 0, 68);" data-color="#2d0044"></button>
+            </div>
+        </div>
+    
+        <!-- Textures Section -->
+        <div id="texture-options">
+            <h4>Textures</h4>
+            <div id="texture-preview">
+                <button class="texture-preview" data-texture="matcap" style="background-image: url('assets/textures/matcap.png'); width: 50px; height: 50px; background-size: cover;"></button>
+            </div>
+        </div>
+    
+        <button id="winkelwagen-button">Add to cart</button>
     </div>
+    
     
     
     
@@ -72,3 +82,4 @@
     
   </body>
 </html>
+
