@@ -122,7 +122,7 @@ document.getElementById('winkelwagen-button').addEventListener('click', () => {
     localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
 
     // Navigeer naar de order.html-pagina
-    window.location.href = 'order.html';
+    window.location.href = '../order.html';
 });
 
 

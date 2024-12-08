@@ -43,7 +43,7 @@ export function setupOrderButton(objectsToCustomize, objectMap) {
                 } else {
                     console.log('Failed to save order', data);
                     alert('Your order has been placed successfully!');
-                    window.location.href = 'succes.html';
+                    window.location.href = './succes.html';
 
                 }
             })
